@@ -1,3 +1,8 @@
+REM ***********************
+REM *      GIT&INSTA      *
+REM *   @johnny.paixaum   *
+REM ***********************
+
 DIM KEYVER
 DIM WINVER
 Set WshShell = WScript.CreateObject("WScript.Shell")
