@@ -48,7 +48,7 @@ WINVER = InputBox("SELECIONE UM NUMERO EQUIVALETE A SUA VERSAO DO WINDOWS 10:" &
 "[20] Enterprise 2016 LTSB N" &vbCRLF&_	
 "[21] Enterprise 2019 LTSC"	&vbCRLF&_
 "[22] Enterprise 2019 LTSC N" &vbCRLF&_
-"OBS:VEROES COMUNS SAO 01,05 e 13","ATIVADOR PARA WINDOWS 10")
+"OBS:VERSOES COMUNS SAO 01,05 e 13","ATIVADOR PARA WINDOWS 10")
 
 if WINVER = "01" then 
     KEYVER=KEY01
@@ -99,8 +99,8 @@ end if
 'MsgBox KEYVER,0,"ATIVADO"
 
 Set WshShell = WScript.CreateObject("WScript.Shell")
-WshShell.run"cscript slmgr.vbs /ipk &KEYVER&"
-WshShell.run"cscript slmgr.vbs /skms kms8.msguides.com"
-WshShell.run"cscript slmgr.vbs /ato"
+WshShell.run "cscript slmgr.vbs /ipk &KEYVER&"
+WshShell.run "cscript slmgr.vbs /skms kms8.msguides.com"
+WshShell.run "cscript slmgr.vbs /ato"
 
 MsgBox "ATIVADO COM SUCESSO! :D",64,"ATIVADOR PARA WINDOWS 10"
