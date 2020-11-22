@@ -1,5 +1,6 @@
 DIM KEYVER
 DIM WINVER
+Set WshShell = WScript.CreateObject("WScript.Shell")
 
 'Batch of serials of all versions:
 KEY01="TX9XD-98N7V-6WMQ6-BX7FG-H8Q99"
@@ -48,6 +49,7 @@ WINVER = InputBox("SELECT A NUMBER EQUIVALENT TO YOUR VERSION OF WINDOWS 10: " &
 "[20] Enterprise 2016 LTSB N" &vbCRLF&_	
 "[21] Enterprise 2019 LTSC"	&vbCRLF&_
 "[22] Enterprise 2019 LTSC N" &vbCRLF&_
+"[99] WHAT IS MY VERSION?" &vbCRLF&_
 "OBS:COMMON VERSIONS ARE 01,05 e 13","ACTIVATOR FOR WINDOWS 10")
 
 if WINVER = "01" then 
@@ -96,11 +98,15 @@ elseif WINVER = "22" Then
     KEYVER=KEY22
 end if
 
-'MsgBox KEYVER,0,"ATIVADO"
-
-Set WshShell = WScript.CreateObject("WScript.Shell")
-WshShell.run "cscript slmgr.vbs /ipk &KEYVER&"
-WshShell.run "cscript slmgr.vbs /skms kms8.msguides.com"
-WshShell.run "cscript slmgr.vbs /ato"
-
-MsgBox "SUCCESSFULLY ACTIVATED! :D",64,"ACTIVATOR FOR WINDOWS 10"
+If IsEmpty(WINVER) Then
+    'cancelled
+    MsgBox "operation has been cancelled",48,"ACTIVATOR FOR WINDOWS 10"
+Elseif WINVER = 99 Then
+    WshShell.run "winver.exe"
+Else
+    'something has entered even zero-length
+    WshShell.run "cscript slmgr.vbs /ipk &KEYVER&"
+    WshShell.run "cscript slmgr.vbs /skms kms8.msguides.com"
+    WshShell.run "cscript slmgr.vbs /ato"
+    MsgBox "SUCCESSFULLY ACTIVATED! :D",64,"ACTIVATOR FOR WINDOWS 10"
+End If

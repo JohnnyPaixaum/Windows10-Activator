@@ -1,5 +1,6 @@
 DIM KEYVER
 DIM WINVER
+Set WshShell = WScript.CreateObject("WScript.Shell")
 
 'Lote de seriais de todas as versões:
 KEY01="TX9XD-98N7V-6WMQ6-BX7FG-H8Q99"
@@ -48,6 +49,7 @@ WINVER = InputBox("SELECIONE UM NUMERO EQUIVALETE A SUA VERSAO DO WINDOWS 10:" &
 "[20] Enterprise 2016 LTSB N" &vbCRLF&_	
 "[21] Enterprise 2019 LTSC"	&vbCRLF&_
 "[22] Enterprise 2019 LTSC N" &vbCRLF&_
+"[99] QUAL A MINHA VERSAO?" &vbCRLF&_
 "OBS:VERSOES COMUNS SAO 01,05 e 13","ATIVADOR PARA WINDOWS 10")
 
 if WINVER = "01" then 
@@ -96,11 +98,14 @@ elseif WINVER = "22" Then
     KEYVER=KEY22
 end if
 
-'MsgBox KEYVER,0,"ATIVADO"
-
-Set WshShell = WScript.CreateObject("WScript.Shell")
-WshShell.run "cscript slmgr.vbs /ipk &KEYVER&"
-WshShell.run "cscript slmgr.vbs /skms kms8.msguides.com"
-WshShell.run "cscript slmgr.vbs /ato"
-
-MsgBox "ATIVADO COM SUCESSO! :D",64,"ATIVADOR PARA WINDOWS 10"
+If IsEmpty(WINVER) Then
+    'cancelled
+    MsgBox "A OPERACAO FOI CANCELADA",48,"ATIVADOR PARA WINDOWS 10"
+Elseif WINVER = 99 Then
+    WshShell.run "winver.exe"
+Else
+    WshShell.run "cscript slmgr.vbs /ipk &KEYVER&"
+    WshShell.run "cscript slmgr.vbs /skms kms8.msguides.com"
+    WshShell.run "cscript slmgr.vbs /ato"
+    MsgBox "ATIVADO COM SUCESSO! :D",64,"ATIVADOR PARA WINDOWS 10"
+End If
