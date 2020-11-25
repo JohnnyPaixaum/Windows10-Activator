@@ -51,7 +51,7 @@ WINVER = InputBox("SELECIONE UM NUMERO EQUIVALETE A SUA VERSAO DO WINDOWS 10: " 
 "[21] Enterprise 2019 LTSC"	&vbCRLF&_
 "[22] Enterprise 2019 LTSC N" &vbCRLF&_
 "[99] QUAL A MINHA VERSAO?" &vbCRLF&_
-"OBS:VERSOES COMUNS SAO 01,05 e 13","ATIVADOR PARA WINDOWS 10 V:BETA")
+"OBS:VERSOES COMUNS SAO 01,05 e 13","ATIVADOR PARA WINDOWS 10 v:latest")
 
 if WINVER = "01" then 
     KEYVER=KEY01
@@ -101,7 +101,7 @@ end if
 
 If IsEmpty(WINVER) Then
     'cancelled
-    MsgBox "A OPERACAO CANCELADA",48,"ATIVADOR PARA WINDOWS 10 V:BETA "
+    MsgBox "A OPERACAO CANCELADA",48,"ATIVADOR PARA WINDOWS 10 v:latest "
 Elseif WINVER = 99 Then
     CmdShell.ShellExecute "winver.exe"
     WScript.Echo ("*****A VERSAO PODE ESTA NO SEGUNDO PARAGRAFO, REABRA O ATIVADOR!*****")
@@ -109,7 +109,7 @@ Else
     'something has entered even zero-length
     TMPFILE.CreateTextFile("C:\Users\Public\Documents\cache_ativador.temp").WriteLine(KEYVER)
 
-    CmdScript.Popup "*****INICIANDO ATIVACAO!*****",, "ACTIVATOR FOR WINDOWS 10"
+    CmdScript.Popup "*****INICIANDO ATIVACAO!*****",, "ACTIVATOR FOR WINDOWS 10 v:latest"
 
     CmdShell.ShellExecute "powershell.exe", "-noexit -Command " &_
             "ECHO *================================*; " &_
