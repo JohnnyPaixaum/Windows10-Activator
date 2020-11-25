@@ -1,13 +1,9 @@
-REM ***********************
-REM *      GIT&INSTA      *
-REM *   @johnny.paixaum   *
-REM ***********************
+DIM KEYVER, TMPFILE, CmdShell, CmdScript
+SET TMPFILE = CreateObject("Scripting.FileSystemObject")
+SET CmdShell = CreateObject("Shell.Application")
+Set CmdScript = WScript.CreateObject( "WScript.Shell" )
 
-DIM KEYVER
-DIM WINVER
-Set WshShell = WScript.CreateObject("WScript.Shell")
-
-'Lote de seriais de todas as versões:
+'Batch of serials of all versions:
 KEY01="TX9XD-98N7V-6WMQ6-BX7FG-H8Q99"
 KEY02="3KHY7-WNT83-DGQKR-F7HPR-844BM"
 KEY03="PVMJN-6DFY6-9CCP6-7BKTT-D3WVR"
@@ -31,7 +27,7 @@ KEY20="QFFDN-GRT3P-VKWWX-X7T3R-8B639"
 KEY21="M7XTQ-FN8P6-TTKYV-9D4CC-J462D"
 KEY22="92NFX-8DJQP-P6BBQ-THF9C-7CG2H"
 
-WINVER = InputBox("SELECIONE UM NUMERO EQUIVALETE A SUA VERSAO DO WINDOWS 10:" &vbCRLF&_ 
+WINVER = InputBox("SELECIONE UM NUMERO EQUIVALETE A SUA VERSAO DO WINDOWS 10: " &vbCRLF&_ 
 "[01] Home/Core" &vbCRLF&_
 "[02] Home/Core N" &vbCRLF&_	
 "[03] Home/Core Country Specific" &vbCRLF&_
@@ -55,7 +51,7 @@ WINVER = InputBox("SELECIONE UM NUMERO EQUIVALETE A SUA VERSAO DO WINDOWS 10:" &
 "[21] Enterprise 2019 LTSC"	&vbCRLF&_
 "[22] Enterprise 2019 LTSC N" &vbCRLF&_
 "[99] QUAL A MINHA VERSAO?" &vbCRLF&_
-"OBS:VERSOES COMUNS SAO 01,05 e 13","ATIVADOR PARA WINDOWS 10")
+"OBS:VERSOES COMUNS SAO 01,05 e 13","ATIVADOR PARA WINDOWS 10 V:BETA")
 
 if WINVER = "01" then 
     KEYVER=KEY01
@@ -105,12 +101,43 @@ end if
 
 If IsEmpty(WINVER) Then
     'cancelled
-    MsgBox "A OPERACAO FOI CANCELADA",48,"ATIVADOR PARA WINDOWS 10"
+    MsgBox "A OPERACAO CANCELADA",48,"ATIVADOR PARA WINDOWS 10 V:BETA "
 Elseif WINVER = 99 Then
-    WshShell.run "winver.exe"
+    CmdShell.ShellExecute "winver.exe"
+    WScript.Echo ("*****A VERSAO PODE ESTA NO SEGUNDO PARAGRAFO, REABRA O ATIVADOR!*****")
 Else
-    WshShell.run "cscript slmgr.vbs /ipk &KEYVER&"
-    WshShell.run "cscript slmgr.vbs /skms kms8.msguides.com"
-    WshShell.run "cscript slmgr.vbs /ato"
-    MsgBox "ATIVADO COM SUCESSO! :D",64,"ATIVADOR PARA WINDOWS 10"
+    'something has entered even zero-length
+    TMPFILE.CreateTextFile("C:\Users\Public\Documents\cache_ativador.temp").WriteLine(KEYVER)
+
+    CmdScript.Popup "*****INICIANDO ATIVACAO!*****",, "ACTIVATOR FOR WINDOWS 10"
+
+    CmdShell.ShellExecute "powershell.exe", "-noexit -Command " &_
+            "ECHO *================================*; " &_
+            "ECHO ***********DESENVOLVEDOR**********; " &_
+            "ECHO *****GIT/INSTA:@johnnypaixaum*****; " &_
+            "ECHO *================================*; " &_
+        "$KEYVER = (cat C:\Users\Public\Documents\cache_ativador.temp); " &_
+            "ECHO *==============*; " &_
+            "ECHO *****STAP_1*****; " &_
+            "ECHO *==============*; " &_
+        "cscript.exe C:\Windows\System32\slmgr.vbs /ipk $KEYVER; " &_
+            "ECHO *==============*; " &_
+            "ECHO *****STAP_2*****; " &_
+            "ECHO *==============*; " &_
+        "cscript.exe C:\Windows\System32\slmgr.vbs /skms kms8.msguides.com; " &_
+            "ECHO *==============*; " &_
+            "ECHO *****STAP_3*****; " &_
+            "ECHO *==============*; " &_
+            "ECHO *=========================================*; " &_
+            "ECHO *****ESPERE_A_FINALIZACAO_DO_PROCESSO!*****; " &_
+            "ECHO *=========================================*; " &_
+        "cscript.exe C:\Windows\System32\slmgr.vbs /ato; " &_
+            "ECHO *===============================*; " &_
+            "ECHO *****ATIVADO_COM_SUCESSO!*****; " &_
+            "ECHO *===============================*; " &_
+        "timeout 15; exit """, "", "runas", 1
+
+WScript.Quit
+WScript.Sleep(10000)
+TMPFILE.DeleteFile("C:\Users\Public\Documents\cache_ativador.temp")
 End If
