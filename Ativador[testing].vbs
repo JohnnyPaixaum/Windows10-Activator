@@ -1,3 +1,8 @@
+REM ***********************
+REM *      GIT&INSTA      *
+REM *   @johnny.paixaum   *
+REM ***********************
+
 KEYS = Array("NUMERO INVARIDO!", _
 "TX9XD-98N7V-6WMQ6-BX7FG-H8Q99", _
 "3KHY7-WNT83-DGQKR-F7HPR-844BM", _
